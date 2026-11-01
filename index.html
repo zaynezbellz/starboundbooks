@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>starbound books ✦ a bookstore from the cosmos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- STARFIELD BACKGROUND -->
+  <canvas id="starfield"></canvas>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">
+    <span class="toast-icon">✦</span>
+    <span id="toast-msg">added to cart!</span>
+  </div>
+
+  <!-- ═══ CART DRAWER ═══ -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2 class="cart-drawer-title">☽ Your Cart</h2>
+      <button class="cart-close-btn" onclick="closeCart()">✕</button>
+    </div>
+
+    <div class="cart-items" id="cart-items"><!-- filled by JS --></div>
+
+    <div class="cart-empty" id="cart-empty">
+      <p class="cart-empty-icon">🌙</p>
+      <p class="cart-empty-text">Your cart is empty.</p>
+      <p class="cart-empty-sub">Add some books from the cosmos!</p>
+    </div>
+
+    <div class="cart-footer" id="cart-footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">&#8369;0</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="checkoutCart()">✦ Proceed to Checkout</button>
+      <button class="cart-clear-btn" onclick="clearCart()">Clear Cart</button>
+    </div>
+  </aside>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav>
+    <a href="#" class="nav-logo">✦ starbound <span>books</span></a>
+    <ul class="nav-links">
+      <li><a href="#books">browse</a></li>
+      <li><a href="#featured">best sellers</a></li>
+      <li><a href="#signs"> categories </a></li>
+      <li><a href="admin.html" class="nav-admin-link">&#9881; Admin</a></li>
+    </ul>
+    <button class="nav-cart" onclick="openCart()">&#9789; Cart <span id="cart-count">0</span></button>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <svg class="hero-constellation" id="hero-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+
+    <div class="hero-badge">✦ bookstore from the cosmos ✦</div>
+    <h1 class="hero-title">
+      where stories fall<br>
+      <em>among the stars</em>
+    </h1>
+    <p class="hero-sub">
+      Discover books written in the language of the cosmos — tales of magic,
+      mystery, and the ancient wisdom of the stars.
+    </p>
+    <div class="hero-btns">
+      <a href="#books" class="btn-primary"><span>✦ Explore the Collection</span></a>
+      <a href="#featured" class="btn-outline">☽ Staff Picks</a>
+    </div>
+  </section>
+
+  <!-- ═══ ZODIAC SCROLLING STRIP ═══ -->
+  <div class="zodiac-strip" id="signs">
+    <div class="zodiac-track" id="zodiac-track"></div>
+  </div>
+
+  <!-- ═══ BOOKS SECTION ═══ -->
+  <div class="section" id="books">
+    <div class="section-header reveal">
+      <p class="section-label">✦ the collection ✦</p>
+      <h2 class="section-title">books for Every <em>stargazer !</em></h2>
+    </div>
+    <div class="categories reveal" id="categories"></div>
+    <div class="books-grid" id="books-grid">
+      <!-- Filled by JavaScript from database -->
+      <div class="loading-msg">✦ Summoning books from the cosmos...</div>
+    </div>
+  </div>
+
+  <!-- ═══ MOON DIVIDER ═══ -->
+  <div class="moon-divider">
+    <div class="moon-line"></div>
+    <div class="moon-phases">
+      <span class="moon-ph">🌑</span>
+      <span class="moon-ph">🌕</span>
+      <span class="moon-ph">🌑</span>
+    </div>
+    <div class="moon-line"></div>
+  </div>
+
+  <!-- ═══ FEATURED BANNER ═══ -->
+  <div class="featured-banner reveal" id="featured">
+    <div class="featured-book-visual">🌙</div>
+    <div class="featured-content">
+      <p class="featured-tag">Book of the Month</p>
+      <h2 class="featured-title">The Lunar Codex</h2>
+      <p class="featured-author">by Celeste Miranova</p>
+      <p class="featured-desc">
+        A spellbinding journey through twelve celestial realms, one for each sign
+        of the zodiac. As the moon shifts its face, so too does our protagonist,
+        uncovering truths buried in starlight and shadow.
+      </p>
+      <div class="featured-price-row">
+        <span class="featured-price">₱580</span>
+        <a href="#" class="btn-primary" onclick="addFeatured(event)">
+          <span>☽ Add to Cart</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ZODIAC PICKS SECTION ═══ -->
+  <div class="section">
+    <div class="section-header reveal">
+      <p class="section-label">✦ Read by the Stars ✦</p>
+      <h2 class="section-title">Picked for <em>Your Sign</em></h2>
+    </div>
+    <div class="books-grid" id="zodiac-books">
+      <!-- Filled by JavaScript from database -->
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <p>✦ &nbsp;<strong>Starbound Books</strong>&nbsp; ✦ &nbsp;
+      Crafted under a waning crescent &nbsp; ✦ &nbsp; © 2025
+    </p>
+  </footer>
+
+  <!-- ═══ CHECKOUT SUCCESS OVERLAY ═══ -->
+  <div class="checkout-overlay" id="checkout-overlay">
+    <div class="checkout-box">
+      <span class="checkout-icon">✦</span>
+      <h2 class="checkout-title">Order Placed!</h2>
+      <p class="checkout-msg">
+        Thank you for shopping at Starbound Books.<br>
+        Your cosmic collection is on its way &#9789;
+      </p>
+      <button class="checkout-close-btn" onclick="closeCheckout()">Continue Browsing</button>
+    </div>
+  </div>
+
+  <!-- JS FILE LINK — must be at bottom of body -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

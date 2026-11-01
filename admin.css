@@ -1,0 +1,670 @@
+/* ═══════════════════════════════════════════════════════════════
+   STARBOUND BOOKS — admin.css
+   Admin panel styles — matches the cosmic theme
+   Place this file at: css/admin.css
+═══════════════════════════════════════════════════════════════ */
+
+
+/* ─── ADMIN BADGE IN NAV ─────────────────────────────────────── */
+.admin-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--aqua);
+  background: rgba(94, 207, 223, 0.1);
+  border: 1px solid rgba(94, 207, 223, 0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+}
+
+
+/* ─── ADMIN MAIN WRAPPER ──────────────────────────────────────── */
+.admin-main {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 7rem 3rem 4rem;
+}
+
+
+/* ─── ADMIN PAGE HEADER ───────────────────────────────────────── */
+.admin-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.admin-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--text-bright);
+  margin-bottom: 0.5rem;
+}
+
+.admin-title em {
+  color: var(--lavender);
+  font-style: italic;
+}
+
+.admin-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+
+/* ─── STATS ROW ───────────────────────────────────────────────── */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(155, 127, 232, 0.5);
+}
+
+.stat-num {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.stat-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+
+/* ─── ACTION BAR ──────────────────────────────────────────────── */
+.admin-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.admin-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+.admin-search {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 25px;
+  padding: 0.65rem 1rem 0.65rem 2.4rem;
+  color: var(--text-bright);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.admin-search::placeholder {
+  color: var(--text-muted);
+}
+
+.admin-search:focus {
+  border-color: rgba(155, 127, 232, 0.6);
+}
+
+.btn-add-book {
+  background: linear-gradient(135deg, var(--purple), var(--violet));
+  color: var(--pale-lilac);
+  border: 1px solid rgba(155, 127, 232, 0.4);
+  padding: 0.7rem 1.8rem;
+  border-radius: 25px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.btn-add-book:hover {
+  background: linear-gradient(135deg, var(--lavender), var(--purple));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(74, 44, 138, 0.4);
+}
+
+
+/* ─── BOOKS TABLE ─────────────────────────────────────────────── */
+.admin-table-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table thead {
+  background: rgba(155, 127, 232, 0.12);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.admin-table th {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  padding: 1rem 1.2rem;
+  text-align: left;
+  font-weight: 500;
+}
+
+.admin-table td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid rgba(155, 127, 232, 0.08);
+  vertical-align: middle;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+
+.admin-table tbody tr {
+  transition: background 0.2s;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(155, 127, 232, 0.06);
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.loading-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  padding: 3rem;
+  letter-spacing: 0.05em;
+}
+
+
+/* ─── TABLE COVER THUMBNAIL ───────────────────────────────────── */
+.tbl-cover {
+  width: 44px;
+  height: 60px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 1px solid rgba(155, 127, 232, 0.25);
+  flex-shrink: 0;
+}
+
+
+/* ─── TABLE TITLE CELL ────────────────────────────────────────── */
+.tbl-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--text-bright);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.tbl-author {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+
+/* ─── TABLE BADGE PILLS ───────────────────────────────────────── */
+.tbl-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.tbl-badge-new  { background: rgba(240,200,74,0.15);  color: var(--gold);    border: 1px solid rgba(240,200,74,0.3); }
+.tbl-badge-best { background: rgba(94,207,223,0.12);  color: var(--aqua);    border: 1px solid rgba(94,207,223,0.3); }
+.tbl-badge-sale { background: rgba(232,114,138,0.12); color: var(--rose);    border: 1px solid rgba(232,114,138,0.3); }
+.tbl-badge-none { color: var(--text-muted); font-size: 0.75rem; }
+
+
+/* ─── TABLE PRICE ─────────────────────────────────────────────── */
+.tbl-price {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.tbl-original {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  font-size: 0.78rem;
+  display: block;
+}
+
+
+/* ─── TABLE ACTION BUTTONS ────────────────────────────────────── */
+.tbl-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-edit, .btn-delete {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.25s;
+  letter-spacing: 0.03em;
+}
+
+.btn-edit {
+  background: rgba(155, 127, 232, 0.15);
+  color: var(--lilac);
+  border-color: rgba(155, 127, 232, 0.3);
+}
+
+.btn-edit:hover {
+  background: rgba(155, 127, 232, 0.3);
+  color: var(--pale-lilac);
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background: rgba(232, 114, 138, 0.12);
+  color: var(--rose);
+  border-color: rgba(232, 114, 138, 0.25);
+}
+
+.btn-delete:hover {
+  background: rgba(232, 114, 138, 0.25);
+  transform: translateY(-1px);
+}
+
+
+/* ─── STARS ───────────────────────────────────────────────────── */
+.tbl-stars {
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ADD / EDIT MODAL
+═══════════════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-box {
+  background: linear-gradient(160deg, rgba(17, 24, 64, 0.98), rgba(10, 10, 26, 0.98));
+  border: 1px solid rgba(155, 127, 232, 0.3);
+  border-radius: 20px;
+  padding: 2.5rem 2.5rem 2rem;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 127, 232, 0.3) transparent;
+}
+
+.modal-overlay.open .modal-box {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.4rem;
+  background: rgba(155, 127, 232, 0.1);
+  border: 1px solid rgba(155, 127, 232, 0.2);
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+.modal-close:hover {
+  background: rgba(232, 114, 138, 0.2);
+  border-color: var(--rose);
+  color: var(--rose);
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--text-bright);
+  margin-bottom: 1.8rem;
+}
+
+.modal-title em {
+  color: var(--lavender);
+}
+
+
+/* ─── FORM FIELDS ─────────────────────────────────────────────── */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lavender);
+}
+
+.label-optional {
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.72rem;
+  font-style: italic;
+}
+
+.form-input,
+.form-select {
+  background: rgba(20, 18, 50, 0.7);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  color: var(--text-bright);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237a6fa0'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.2rem;
+  cursor: pointer;
+}
+
+.form-select option {
+  background: #111840;
+  color: var(--text-bright);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: rgba(155, 127, 232, 0.6);
+  box-shadow: 0 0 0 3px rgba(155, 127, 232, 0.08);
+}
+
+
+/* ─── COVER PREVIEW ───────────────────────────────────────────── */
+.cover-preview-wrap {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cover-preview {
+  width: 80px;
+  height: 110px;
+  border-radius: 8px;
+  border: 1px solid rgba(155, 127, 232, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  background: linear-gradient(160deg, #2d1b69, #4a2c8a, #1a1244);
+  transition: background 0.4s;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ─── MODAL ACTIONS ───────────────────────────────────────────── */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(155, 127, 232, 0.12);
+}
+
+.btn-cancel {
+  background: rgba(155, 127, 232, 0.08);
+  border: 1px solid rgba(155, 127, 232, 0.2);
+  color: var(--text-muted);
+  padding: 0.65rem 1.5rem;
+  border-radius: 25px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-cancel:hover {
+  background: rgba(155, 127, 232, 0.15);
+  color: var(--text-soft);
+}
+
+.btn-save {
+  background: linear-gradient(135deg, var(--purple), var(--violet));
+  color: var(--pale-lilac);
+  border: 1px solid rgba(155, 127, 232, 0.4);
+  padding: 0.65rem 1.8rem;
+  border-radius: 25px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-save:hover {
+  background: linear-gradient(135deg, var(--lavender), var(--purple));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(74, 44, 138, 0.4);
+}
+
+.btn-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   DELETE CONFIRM MODAL
+═══════════════════════════════════════════════════════════════ */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.confirm-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.confirm-box {
+  background: linear-gradient(160deg, rgba(17, 24, 64, 0.98), rgba(10, 10, 26, 0.98));
+  border: 1px solid rgba(232, 114, 138, 0.3);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  transform: scale(0.9);
+  transition: transform 0.3s;
+}
+
+.confirm-overlay.open .confirm-box {
+  transform: scale(1);
+}
+
+.confirm-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.confirm-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--text-bright);
+  margin-bottom: 0.6rem;
+}
+
+.confirm-msg {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.btn-delete-confirm {
+  background: rgba(232, 114, 138, 0.2);
+  border: 1px solid rgba(232, 114, 138, 0.4);
+  color: var(--rose);
+  padding: 0.65rem 1.8rem;
+  border-radius: 25px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-delete-confirm:hover {
+  background: rgba(232, 114, 138, 0.35);
+  transform: translateY(-1px);
+}
+
+
+/* ─── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 6rem 1.2rem 3rem;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-search-wrap {
+    max-width: 100%;
+  }
+
+  .admin-table th:nth-child(5),
+  .admin-table td:nth-child(5),
+  .admin-table th:nth-child(6),
+  .admin-table td:nth-child(6) {
+    display: none;
+  }
+
+  .modal-box {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+}

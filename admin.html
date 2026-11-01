@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel ✦ Starbound Books</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- STARFIELD BACKGROUND -->
+  <canvas id="starfield"></canvas>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">
+    <span class="toast-icon">✦</span>
+    <span id="toast-msg">Done!</span>
+  </div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav>
+    <a href="index.html" class="nav-logo">✦ starbound <span>books</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">← Back to Store</a></li>
+    </ul>
+    <div class="admin-badge">⚙ Admin Panel</div>
+  </nav>
+
+  <!-- ═══ MAIN ADMIN CONTENT ═══ -->
+  <main class="admin-main">
+
+    <!-- Page Header -->
+    <div class="admin-header reveal">
+      <p class="section-label">✦ management console ✦</p>
+      <h1 class="admin-title">Book <em>Inventory</em></h1>
+      <p class="admin-subtitle">Add, edit, or remove books from the cosmic collection.</p>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="admin-stats reveal" id="admin-stats">
+      <div class="stat-card">
+        <span class="stat-num" id="stat-total">—</span>
+        <span class="stat-label">Total Books</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" id="stat-categories">—</span>
+        <span class="stat-label">Categories</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" id="stat-sale">—</span>
+        <span class="stat-label">On Sale</span>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="admin-action-bar reveal">
+      <div class="admin-search-wrap">
+        <span class="search-icon">✦</span>
+        <input type="text" id="admin-search" class="admin-search" placeholder="Search books by title or author…" oninput="filterAdminBooks()">
+      </div>
+      <button class="btn-add-book" onclick="openModal()">+ Add New Book</button>
+    </div>
+
+    <!-- Books Table -->
+    <div class="admin-table-wrap reveal">
+      <table class="admin-table" id="admin-table">
+        <thead>
+          <tr>
+            <th>Cover</th>
+            <th>Title &amp; Author</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Badge</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-tbody">
+          <tr><td colspan="7" class="loading-msg">✦ Loading books from the cosmos…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- ═══ ADD / EDIT MODAL ═══ -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box" id="modal-box">
+
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h2 class="modal-title" id="modal-title">Add New Book</h2>
+
+      <form id="book-form" onsubmit="submitForm(event)">
+        <input type="hidden" id="form-id">
+
+        <!-- Row 1: Title + Author -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Title *</label>
+            <input type="text" id="form-title" class="form-input" placeholder="e.g. The Lunar Codex" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Author *</label>
+            <input type="text" id="form-author" class="form-input" placeholder="e.g. Celeste Miranova" required>
+          </div>
+        </div>
+
+        <!-- Row 2: Price + Original Price -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Price (₱) *</label>
+            <input type="number" id="form-price" class="form-input" placeholder="e.g. 480" min="1" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Original Price (₱) <span class="label-optional">optional — for sale</span></label>
+            <input type="number" id="form-original" class="form-input" placeholder="e.g. 580" min="1">
+          </div>
+        </div>
+
+        <!-- Row 3: Category + Badge -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select id="form-category" class="form-select" required>
+              <option value="">— Select category —</option>
+              <option value="Fiction">Fiction</option>
+              <option value="Astrology">Astrology</option>
+              <option value="Mythology">Mythology</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="Tarot &amp; Magic">Tarot &amp; Magic</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Badge <span class="label-optional">optional</span></label>
+            <select id="form-badge" class="form-select">
+              <option value="">— No badge —</option>
+              <option value="new">✦ New</option>
+              <option value="best">☽ Bestseller</option>
+              <option value="sale">✦ Sale</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 4: Emoji + Cover Color + Rating -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Cover Emoji *</label>
+            <input type="text" id="form-emoji" class="form-input" placeholder="e.g. 🌙" required maxlength="4">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cover Color *</label>
+            <select id="form-bg" class="form-select" required>
+              <option value="">— Select color —</option>
+              <option value="purple">Purple</option>
+              <option value="teal">Teal</option>
+              <option value="rose">Rose</option>
+              <option value="amber">Amber</option>
+              <option value="navy">Navy</option>
+              <option value="green">Green</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rating (1–5) *</label>
+            <input type="number" id="form-rating" class="form-input" min="1" max="5" value="4" required>
+          </div>
+        </div>
+
+        <!-- Cover Preview -->
+        <div class="cover-preview-wrap">
+          <label class="form-label">Cover Preview</label>
+          <div class="cover-preview" id="cover-preview">
+            <span id="preview-emoji">📖</span>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-save" id="btn-save">✦ Save Book</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ═══ DELETE CONFIRM MODAL ═══ -->
+  <div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-box">
+      <p class="confirm-icon">🌑</p>
+      <h3 class="confirm-title">Remove this book?</h3>
+      <p class="confirm-msg" id="confirm-msg">This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn-cancel" onclick="cancelDelete()">Cancel</button>
+        <button class="btn-delete-confirm" id="btn-confirm-delete" onclick="confirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>✦ &nbsp;<strong>Starbound Books</strong>&nbsp; ✦ &nbsp;Admin Console &nbsp; ✦ &nbsp; © 2025</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+</html>
